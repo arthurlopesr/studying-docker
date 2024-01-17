@@ -2,12 +2,31 @@ version: "3"
 
 services:
   node:
+    build:
+      context: .
     image: arthurlopr12/hello-express
     container_name: node
     networks:
       - node-network
+    volumes:
+      - .:/user/src/app
+    tty: true
     ports:
       - 3000:3000
+
+  postgres:
+    image: postgres
+    container_name: postgresdb
+    restart: always
+    tty: true
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgresdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    networks:
+      - node-network
 
 networks:
   node-network:
