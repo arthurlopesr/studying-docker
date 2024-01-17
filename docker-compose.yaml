@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  node:
+    image: arthurlopr12/hello-express
+    container_name: node
+    networks:
+      - node-network
+    ports:
+      - 3000:3000
+
+networks:
+  node-network:
+    driver: bridge
