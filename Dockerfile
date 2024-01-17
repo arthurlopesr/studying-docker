@@ -1,8 +1,9 @@
 FROM node:latest
 
-WORKDIR /var/www
+WORKDIR /user/src/app
 
-RUN apt-get update && apt-get install -y 
+COPY . .
 
-RUN npm init -y && npm instal typescript @types/node ts-node-dev -D 
-   
+EXPOSE 3000
+
+CMD ["npm", "run", "start:dev"]
